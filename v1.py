@@ -7,10 +7,10 @@ import googletrans
 from GenerateWeather import GenerateWeather
 
 # Set the GPT-3 API key
-with open('./api_key.json') as f:
-    data = json.load(f)
-openai.api_key = data['open_ai']
-stable_diffusion_key = data['stable_diffusion']
+# with open('./api_key.json') as f:
+#     data = json.load(f)
+openai.api_key = st.secrets('open_ai')
+stable_diffusion_key = st.secrets('stable_diffusion')
 
 #prompt용 dict
 style_dict = {
