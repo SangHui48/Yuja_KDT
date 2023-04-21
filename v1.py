@@ -126,37 +126,38 @@ with st.form("form_index", clear_on_submit=True):
             You should reply only to the items you recommend in 1 sentence without any special symbol or number, and not to reply otherwise. 
             Separate other categories with a dot.
             '''
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=template_gpt,
-            max_tokens = 3000,
-            temperature = 0.5,
-        )
-        res = response['choices'][0]['text']
-        # chatGPT 추천 결과를 이용해 stable diffustion 프롬프트용 템플릿 재생성
-        # 결과 예시
-        # 남자, 72, 182cm, 80kg A tailored navy blazer , A light white dress shirt , Khaki trousers/chinos , Brown loafers
-        # template_sd = f"{params['gender']}, {params['age']}, {params['height']}cm, {params['weight']}kg,"
+        st.write('서버 점검중......')
+        # response = openai.Completion.create(
+        #     engine="text-davinci-003",
+        #     prompt=template_gpt,
+        #     max_tokens = 3000,
+        #     temperature = 0.5,
+        # )
+        # res = response['choices'][0]['text']
+        # # chatGPT 추천 결과를 이용해 stable diffustion 프롬프트용 템플릿 재생성
+        # # 결과 예시
+        # # 남자, 72, 182cm, 80kg A tailored navy blazer , A light white dress shirt , Khaki trousers/chinos , Brown loafers
+        # # template_sd = f"{params['gender']}, {params['age']}, {params['height']}cm, {params['weight']}kg,"
+        # # template_sd += res.replace('.', ',')
+        # decorator = 'handsome' if params['gender'] == 'man' else 'beautiful'
+        # template_sd = f'''
+        #     ultra detail, ultra realistic, 8K, 3D, natural light, photorealism: {decorator}, {params['age']}, {params['height']}cm, {params['weight']}kg, {params['gender']}, well-proportioned,
+        #     {params['body_shape']}, fashion model, {params['style']},
+        # '''
         # template_sd += res.replace('.', ',')
-        decorator = 'handsome' if params['gender'] == 'man' else 'beautiful'
-        template_sd = f'''
-            ultra detail, ultra realistic, 8K, 3D, natural light, photorealism: {decorator}, {params['age']}, {params['height']}cm, {params['weight']}kg, {params['gender']}, well-proportioned,
-            {params['body_shape']}, fashion model, {params['style']},
-        '''
-        template_sd += res.replace('.', ',')
-        url = 'https://stablediffusionapi.com/api/v3/text2img'
-        data = {
-            "key": stable_diffusion_key,
-            "prompt": template_sd,
-            "width": "1000",
-            "height": "1000",
-            "samples": "1",
-        }
-        response = requests.post(url, data=data)
-        res = response.json()
-        result_url = res['output'][0]
+        # url = 'https://stablediffusionapi.com/api/v3/text2img'
+        # data = {
+        #     "key": stable_diffusion_key,
+        #     "prompt": template_sd,
+        #     "width": "1000",
+        #     "height": "1000",
+        #     "samples": "1",
+        # }
+        # response = requests.post(url, data=data)
+        # res = response.json()
+        # result_url = res['output'][0]
 
-        # 결과 이미지 출력
-        st.write(f'입력하신 조건값: {template_sd}')
-        st.write('=====================================')
-        st.image(result_url, width=400)
+        # # 결과 이미지 출력
+        # st.write(f'입력하신 조건값: {template_sd}')
+        # st.write('=====================================')
+        # st.image(result_url, width=400)
