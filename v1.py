@@ -152,4 +152,6 @@ with st.form("form_index", clear_on_submit=True):
         # 결과 이미지 출력
         st.write(f"입력하신 조건값: {params['gender']}, {params['age']}, {params['height']}cm, {params['weight']}kg,{params['body_shape']}, {params['style']}")
         st.write('=====================================')
+        st.write(f"GPT는 다음과 같은 옷들을 추천해 줬어요: {res.replace('.', ',')}")
+        st.write('=====================================')
         st.image(result_url, width=400)
