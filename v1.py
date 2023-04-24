@@ -133,7 +133,8 @@ with st.form("form_index", clear_on_submit=True):
             ultra detail, ultra realistic, 8K, 3D, natural light, photorealism: {decorator}, {params['age']}, {params['height']}cm, {params['weight']}kg, {params['gender']}, well-proportioned,
             {params['body_shape']}, fashion model, {params['style']},
         '''
-        template_sd += res.replace('.', ',')
+        options = res.replace('.', ',')
+        template_sd += options
         try:
             url = 'https://stablediffusionapi.com/api/v3/text2img'
             data = {
@@ -152,6 +153,6 @@ with st.form("form_index", clear_on_submit=True):
         # 결과 이미지 출력
         st.write(f"입력하신 조건값: {params['gender']}, {params['age']}, {params['height']}cm, {params['weight']}kg,{params['body_shape']}, {params['style']}")
         st.write('=====================================')
-        st.write(f"GPT는 다음과 같은 옷들을 추천해 줬어요: {res.replace('.', ',')}")
+        st.write(f"GPT는 다음과 같은 옷들을 추천해 줬어요: {options}")
         st.write('=====================================')
         st.image(result_url, width=400)
