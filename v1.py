@@ -74,7 +74,7 @@ with st.form("form_index", clear_on_submit=True):
             st.error('나이는 숫자로만 입력해야 합니다')
             st.stop()
 
-        sex = 'man' if gender == '남자' else 'woman'
+        sex = 'male' if gender == '남자' else 'female'
 
         # 날씨 받아오기
         try:
