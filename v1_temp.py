@@ -7,8 +7,10 @@ import googletrans
 from GenerateWeather import GenerateWeather
 
 # Set the GPT-3 API key
-openai.api_key = st.secrets['open_ai']
-stable_diffusion_key = st.secrets['stable_diffusion']
+with open('./api_key.json') as f:
+    data = json.load(f)
+openai.api_key = data['open_ai']
+stable_diffusion_key = data['stable_diffusion']
 
 #prompt용 dict
 style_dict = {
@@ -19,8 +21,6 @@ style_dict = {
         '포멀': 'formal' ,
         '골프': 'golf',
         '홈웨어': 'homeware',
-        '레트로': 'retro',
-        '로맨틱': 'romantic',
         '스포츠': 'sports',
         '스트릿': 'street',
         '고프코어': 'gorpcore',
@@ -30,7 +30,6 @@ style_dict_woman = {
         '아메리칸 케주얼': 'American casual',
         '케주얼': 'casual',
         '시크': 'chic',
-        '댄디' : 'dandy',
         '포멀': 'formal' ,
         '걸리시': 'girlish',
         '골프': 'golf',
@@ -53,11 +52,11 @@ body_dict = {
 st.title("chatGPT 활용 코디 추천")
 
 with st.form("form_index", clear_on_submit=True):
-    gender = st.radio('성별', options=['남자','여자'], index=0, horizontal=True)
-    if gender == '남자':
-        style = st.selectbox('원하는 스타일', options=list(style_dict.keys()), index=0)
+    gender = st.selectbox('성별', options=['남자', '여자'], on_change=gender_callback index=0, key='gender')
+    if st.session_state.gender == '남자':
+        st.selectbox('원하는 스타일', options=list(style_dict.keys()), index=0)
     else:
-        style = st.selectbox('원하는 스타일', options=list(style_dict_woman.keys()), index=0)
+        st.selectbox('원하는 스타일', options=list(style_dict_woman.keys()), index=0)
     bodyshape = st.selectbox('체형', options=list(body_dict.keys()))
     # color = st.selectbox('선호하는 색깔', options=)
     height = st.text_input('신장(키)')
