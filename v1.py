@@ -130,7 +130,7 @@ with st.form("form_index", clear_on_submit=True):
         # template_sd += res.replace('.', ',')
         decorator = 'handsome' if params['gender'] == 'man' else 'beautiful'
         template_sd = f'''
-            ultra detail, ultra realistic, 8K, 3D, natural light, photorealism: {decorator}, {params['age']}, {params['height']}cm, {params['weight']}kg, {params['gender']}, well-proportioned,
+            ultra detail, ultra realistic, 8K, 3D, natural light, photorealism: {decorator}, {params['age']}, {params['height']}cm, {params['weight']}kg, ({params['gender']}:1.5), (well-proportioned:1.5),
             {params['body_shape']}, fashion model, {params['style']},
         '''
         options = res.replace('.', ',')
